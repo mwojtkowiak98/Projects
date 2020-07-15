@@ -1,0 +1,158 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    background-color: #f2f2f2;
+}
+
+a{
+    text-decoration: none;
+}
+
+/* page header */
+
+.logo{
+    width: 30vw;
+}
+
+.cart{
+    display: none;
+}
+
+.cart-icon{
+    width: 5vw;
+}
+
+.login{
+    margin-top: 1.5vw;
+    border: none;
+    font-size: 17px;
+    background-color: transparent;
+}
+
+.menu{
+    display: flex;
+    background-color: white;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header-links{
+    display: flex;
+}
+
+.header-links li{
+    margin: 20px;
+    list-style: none;
+}
+
+.space{
+    margin-top: 40px;
+}
+
+/* searchbox */
+
+.search-box{
+    display: flex;
+    margin-left: 20vw;
+}
+
+#search-icon{
+    width: 35px;
+}
+
+#gsearch{
+    width: 50vw;
+}
+
+/* aside */
+
+nav{
+    padding: 15px;
+    background-color: white;
+    text-align: center;
+}
+
+.ul-categories li{
+    margin-top: 10px;
+    list-style: none;
+}
+
+.ul-categories2 li{
+    margin-top: 2px;
+    list-style: none;
+}
+
+h1{
+    font-size: 28px;
+    border-bottom: 5px;
+    text-decoration-line: underline;
+    color: darkolivegreen;
+}
+
+h2{
+    font-size: 22px;
+    color: darkgreen;
+}
+
+h3{
+    font-size: 16px;
+    color: limegreen;
+}
+
+/* for bigger devices */
+@media(min-width: 961px){
+    .logo{
+        width: 20vw;
+    }
+
+    .cart-icon{
+        width: 2vw;
+    }
+
+    .login{
+        margin-top: 0.6vw;
+    }
+
+    /* searchbox */
+
+    .search-box{
+        float: left;
+    }
+
+    #search-icon{
+        margin-left: 3vw;
+    }
+
+    #gsearch{
+        width: 50vw;
+    }
+
+    /* aside */
+
+    nav{
+        margin-left: 40px;
+        width: 180px;
+        text-align: left;
+    }
+
+    .ul-categories{
+        margin-left: 5px;
+    }
+
+    h1{
+        font-size: 32px;
+    }
+    
+    h2{
+        font-size: 26px;
+    }
+    
+    h3{
+        font-size: 20px;
+    }
+
+}
