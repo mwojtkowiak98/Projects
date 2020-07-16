@@ -32,14 +32,15 @@
   </header>
   <div class="space"></div>
 
+  <!-- Search input -->
   <div class="search-box">
-
   <img src="../search_icon.png" id="search-icon">
 
-  <label for="gsearch"></label>
-  <input type="search" id="gsearch" name="gsearch">
-
+  <form action=./index.php method=get>
+    <input type="search" id="gsearch" name="query" placeholder="Szukaj produktu...">
+  </form>
   </div>
+
   <div class="space"></div>
 
   <aside>
@@ -81,7 +82,6 @@
     }
 
       //returns products
-
       $sql = "SELECT  id, name, price, image FROM `products`";
 
       if(strpos($_SERVER['REQUEST_URI'], "?-Herbata")){
@@ -100,6 +100,11 @@
         $sql = "SELECT  id, name, price, image FROM `products` WHERE podkategoria = 'naczynia'";
       }
 
+      //returns products from search input
+      else if(strpos($_SERVER['REQUEST_URI'], "?query=")){
+        $query = $_GET['query'];
+        $sql = "SELECT id, name, price, image FROM `products` WHERE (`name` LIKE '%".$query."%')";
+      }
 
 
       $result = $conn->query($sql);
