@@ -81,6 +81,11 @@ nav{
     list-style: none;
 }
 
+.ul-categories li button, .ul-categories2 button{
+    background-color: transparent;
+    border: none;
+}
+
 .ul-categories2 li{
     margin-top: 2px;
     list-style: none;

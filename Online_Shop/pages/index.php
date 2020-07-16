@@ -45,17 +45,27 @@
   <aside>
     <nav>
       <ul class="ul-categories"><h1>Kategorie</h1>
-        <li><a href="#">
-          <ul class="ul-categories2"><h2>Herbata</h2></a>
-            <li><a href="#"><h3>mate green</h3></li></a>
-            <li><a href="#"><h3>paraguayan</h3></li></a>
+        <li><form action=./index.php?-Herbata method=post>
+          <ul class="ul-categories2"><button type = submit name = herbata value = herbata><h2>Herbata</h2></button></form>
+            <li><form action=./index.php?-mate-green method=post>
+            <button type = submit name = herbata value = mate-green><h3>mate green</h3></button></form>
+            </li>
+            <li><form action=./index.php?-paraguayan method=post>
+            <button type = submit name = herbata value = paraguayan><h3>paraguayan</h3></button></form>
+            </li>
           </ul>
         </li>
-        <li><a href="#"><h2>Zestawy</h2></li></a>
-        <li><a href="#">
-          <ul class="ul-categories2"><h2>Akcesoria</h2></a>
-            <li><a href="#"><h3>bombille</h3></li></a>
-            <li><a href="#"><h3>naczynia</h3></li></a>
+        <li><form action=./index.php?-zestawy method=post>
+        <button type = submit name = zestawy value = zestawy><h2>Zestawy</h2></button></form>
+        </li>
+        <li><form action=./index.php?-Akcesoria method=post>
+          <ul class="ul-categories2"><button type = submit name = akcesoria value = akcesoria><h2>Akcesoria</h2></button></form>
+            <li><form action=./index.php?-bombille method=post>
+            <button type = submit name = akcesoria value = bombille><h3>bombille</h3></button></form>
+            </li>
+            <li><form action=./index.php?-naczynia method=post>
+            <button type = submit name = akcesoria value = naczynia><h3>naczynia</h3></button></form>
+            </li>
           </ul>
         </li>
       </ul>
@@ -71,22 +81,57 @@
     }
 
       //returns products
+
       $sql = "SELECT  id, name, price, image FROM `products`";
+
+      if(strpos($_SERVER['REQUEST_URI'], "?-Herbata")){
+        $sql = "SELECT  id, name, price, image FROM `products` WHERE kategoria = 'herbata'";
+      } else if(strpos($_SERVER['REQUEST_URI'], "?-mate-green")){
+        $sql = "SELECT  id, name, price, image FROM `products` WHERE podkategoria = 'mate_green'";
+      } else if(strpos($_SERVER['REQUEST_URI'], "?-paraguayan")){
+        $sql = "SELECT  id, name, price, image FROM `products` WHERE podkategoria = 'paraguayan'";
+      } else if(strpos($_SERVER['REQUEST_URI'], "?-zestawy")){
+        $sql = "SELECT  id, name, price, image FROM `products` WHERE kategoria = 'zestawy'";
+      } else if(strpos($_SERVER['REQUEST_URI'], "?-Akcesoria")){
+        $sql = "SELECT  id, name, price, image FROM `products` WHERE kategoria = 'akcesoria'";
+      } else if(strpos($_SERVER['REQUEST_URI'], "?-bombille")){
+        $sql = "SELECT  id, name, price, image FROM `products` WHERE podkategoria = 'bombille'";
+      } else if(strpos($_SERVER['REQUEST_URI'], "?-naczynia")){
+        $sql = "SELECT  id, name, price, image FROM `products` WHERE podkategoria = 'naczynia'";
+      }
+
+
+
       $result = $conn->query($sql);
 
       echo '<div class=content style="margin-left:18vw;margin-right:18vw;">';
+
+      //post item to cart
+      echo  '<form action="" method="post">';
+
       if ($result->num_rows > 0) {
         // output data of each row
         while($row = $result->fetch_assoc()) {
           echo '<div class=items style="display:flex; float:left;">';
-          echo '<div class=item style="margin:30px;display:inline-block;">';
-          echo  $row["name"]. " " . $row["price"]. "<br>";
+          echo '<div class=item style="margin:30px;display:inline-block; text-align:center; background-color: lightyellow">';
+          echo  $row["name"]."<br>";
           echo '<img id="img" style= "width: 200px; height:200px;" src="data:image/jpeg/png;base64,'.base64_encode( $row["image"] ).'"/> <br>';
+          echo  $row["price"]. " zł"."<br>";
+          echo "<button type='submit' style=background-color:#e4ffe5; name='product' value='$row[name]'> Do koszyka </button>";
           echo '</div>';
           echo '</div>';
         }
       }
       echo '</div>';
+
+      //save product in session variable
+      echo "</form>";
+      if(isset($_POST['product'])){
+        $product = $_POST['product'];
+        if(!isset($_SESSION['product'][$product])) $_SESSION['product'][$product] = 1;
+        else $_SESSION['product'][$product]++;
+      }
+
       $conn->close();
   ?>
 
