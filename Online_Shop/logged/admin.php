@@ -1,7 +1,7 @@
 <?php
   session_start();
-  //checking logged account
-  if(isset($_SESSION['logged']['email'])){
+  //checking logged account prem = 1 is user, prem = 2 is admin
+  if($_SESSION['logged']['premission'] != 1 ){
     header('location: ../scripts/login.php');
   }
 ?>
@@ -28,6 +28,10 @@
       </li>
 
       <li><a href="./login_page.php"><button class = "login">Zaloguj</button></a></li>
+      <!-- User display -->
+      <div class = "user">Witaj : <?php echo $_SESSION['logged']['name']; ?></div>
+      <!-- Logout button -->
+      <a href="../scripts/logout.php"><button class = "login">Wyloguj</button></a>
     </ul>
   </header>
   <div class="space"></div>
@@ -47,25 +51,25 @@
     <nav>
       <ul class="ul-categories"><h1>Kategorie</h1>
         <li><form action=./index.php?-Herbata method=post>
-          <ul class="ul-categories2"><button type = submit class=cat-button name = herbata value = herbata><h2>Herbata</h2></button></form>
+          <ul class="ul-categories2"><button type = submit name = herbata value = herbata><h2>Herbata</h2></button></form>
             <li><form action=./index.php?-mate-green method=post>
-            <button type = submit class=cat-button name = herbata value = mate-green><h3>mate green</h3></button></form>
+            <button type = submit name = herbata value = mate-green><h3>mate green</h3></button></form>
             </li>
             <li><form action=./index.php?-paraguayan method=post>
-            <button type = submit class=cat-button name = herbata value = paraguayan><h3>paraguayan</h3></button></form>
+            <button type = submit name = herbata value = paraguayan><h3>paraguayan</h3></button></form>
             </li>
           </ul>
         </li>
         <li><form action=./index.php?-zestawy method=post>
-        <button type = submit class=cat-button name = zestawy value = zestawy><h2>Zestawy</h2></button></form>
+        <button type = submit name = zestawy value = zestawy><h2>Zestawy</h2></button></form>
         </li>
         <li><form action=./index.php?-Akcesoria method=post>
-          <ul class="ul-categories2"><button type = submit class=cat-button name = akcesoria value = akcesoria><h2>Akcesoria</h2></button></form>
+          <ul class="ul-categories2"><button type = submit name = akcesoria value = akcesoria><h2>Akcesoria</h2></button></form>
             <li><form action=./index.php?-bombille method=post>
-            <button type = submit class=cat-button name = akcesoria value = bombille><h3>bombille</h3></button></form>
+            <button type = submit name = akcesoria value = bombille><h3>bombille</h3></button></form>
             </li>
             <li><form action=./index.php?-naczynia method=post>
-            <button type = submit class=cat-button name = akcesoria value = naczynia><h3>naczynia</h3></button></form>
+            <button type = submit name = akcesoria value = naczynia><h3>naczynia</h3></button></form>
             </li>
           </ul>
         </li>
@@ -109,7 +113,7 @@
 
       $result = $conn->query($sql);
 
-      echo '<div class=content style="margin-left:21vw;margin-right:18vw;">';
+      echo '<div class=content style="margin-left:18vw;margin-right:18vw;">';
 
       //post item to cart
       echo  '<form action="" method="post">';
