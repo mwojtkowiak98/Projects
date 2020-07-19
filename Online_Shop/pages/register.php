@@ -32,7 +32,7 @@
         <p class="login-form-msg">Zarejestruj się</p>
 
         <!-- Register form  -->
-        <form action="./scripts/add_user.php" method="post">
+        <form action="../scripts/add_user.php" method="post">
             <div class="input-group">
               <input type="text" placeholder="Imie" name="name">
             </div>

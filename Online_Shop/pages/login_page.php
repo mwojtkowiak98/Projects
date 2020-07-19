@@ -34,7 +34,7 @@
           <p class="login-form-msg">Zaloguj się</p>
 
         <!-- Login form -->
-        <form action="./scripts/login.php" method="post">
+        <form action="../scripts/login.php" method="post">
           <div class="input-group">
             <input type="email" placeholder="Email" name="email">
           </div>

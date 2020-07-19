@@ -1,7 +1,7 @@
 <?php
   session_start();
-  //checking logged account prem = 1 is user, prem = 2 is admin
-  if($_SESSION['logged']['premission'] != 2 ){
+  //checking logged account, prem = 1 is user, prem = 2 is admin
+  if($_SESSION['logged']['premission'] != 1 ){
     header('location: ../scripts/login.php');
   }
 ?>
@@ -17,7 +17,7 @@
 </head>
 <body>
   <header class="menu">
-  <a href="./index.php"><img src="../yerba_logo.png" class="logo"></a>
+  <a href="../pages/index.php"><img src="../yerba_logo.png" class="logo"></a>
     <ul class="header-links">
       <li>
         <form action="./cart.php" method="post">

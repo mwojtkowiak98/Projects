@@ -44,7 +44,7 @@
         require_once './connect.php';
         if($conn->connect_errno){
             $_SESSION['error'] = 'Nie można połączyć się z bazą';
-            header('location: ../register.php');
+            header('location: ../pages/register.php');
             exit();
         }
         
@@ -57,7 +57,7 @@
         if($stmt->execute()){
             $conn->close();
             $stmt->close();
-            header('location: ../login_page.php');
+            header('location: ../pages/login_page.php');
             $_SESSION['error'] = 'Rejestracja zakończona powodzeniem';
         }
 

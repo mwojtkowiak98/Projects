@@ -1,7 +1,7 @@
 <?php
   session_start();
   //checking logged account prem = 1 is user, prem = 2 is admin
-  if($_SESSION['logged']['premission'] != 1 ){
+  if($_SESSION['logged']['premission'] != 2 ){
     header('location: ../scripts/login.php');
   }
 ?>
@@ -27,7 +27,7 @@
         </form>
       </li>
 
-      <li><a href="./login_page.php"><button class = "login">Zaloguj</button></a></li>
+      <li><a href="../pages/login_page.php"><button class = "login">Zaloguj</button></a></li>
       <!-- User display -->
       <div class = "user">Witaj : <?php echo $_SESSION['logged']['name']; ?></div>
       <!-- Logout button -->
