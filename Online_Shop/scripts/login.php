@@ -58,6 +58,11 @@
                 }
             }
 
+            else{
+                $error = 1;
+                $_SESSION['error'] = "Błędny login lub hasło";
+            }
+
             //error
             if($error == 1){
                 ?>
