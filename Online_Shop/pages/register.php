@@ -22,7 +22,7 @@
       echo<<<ERROR
         <div class="error">
             <h3 class="error-title">{$_SESSION['error']}</h3>
-        <div>
+        </div>
       ERROR;
         unset($_SESSION['error']);
       }
