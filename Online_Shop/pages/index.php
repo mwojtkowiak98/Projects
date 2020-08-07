@@ -21,7 +21,6 @@
     <ul class="header-links">
       <li>
         <form action="./cart.php" method="post">
-          <input type='submit' class="cart" name='product' value='Cart'>
           <a href="./cart.php"><img src="../cart_icon.png" class="cart-icon"></a>
          <!-- Zrobic sume koszyka -->
         </form>
@@ -31,6 +30,10 @@
     </ul>
   </header>
   <div class="space"></div>
+
+  <div class="cointainer-parallax">
+    <div class="parallax"><p>Yerba mate z całego świata.</p></div>
+  </div>
 
   <!-- Search input -->
   <div class="search-box">
@@ -108,7 +111,9 @@
 
 
       $result = $conn->query($sql);
+      echo '<div class=page-wrapper>';
 
+      //styles are used here just to test something. It should be in css file.(it makes a lot of mess here)
       echo '<div class=content style="margin-left:21vw;margin-right:18vw;">';
 
       //post item to cart
@@ -118,19 +123,38 @@
         // output data of each row
         while($row = $result->fetch_assoc()) {
           echo '<div class=items style="display:flex; float:left;">';
-          echo '<div class=item style="margin:30px;display:inline-block; text-align:center; background-color: lightyellow">';
+          echo '<div class=item style="margin:30px;display:inline-block; text-align:center; background-color: lightyellow; cursor:pointer;
+          box-shadow: 0px 2px limegreen">';
           echo  $row["name"]."<br>";
           echo '<img id="img" style= "width: 200px; height:200px;" src="data:image/jpeg/png;base64,'.base64_encode( $row["image"] ).'"/> <br>';
           echo  $row["price"]. " zł"."<br>";
-          echo "<button type='submit' style=background-color:#e4ffe5; name='product' value='$row[name]'> Do koszyka </button>";
+          echo "<button type='submit' style='background-color:#e4ffe5; cursor:pointer; padding:3px;' name='product' value='$row[name]'> Do koszyka </button>";
           echo '</div>';
           echo '</div>';
         }
       }
+      echo "</form>";   
       echo '</div>';
 
+      //Footer isn't fully responsive. Works properly only for list of all products, because page doesn't refresh when we choose category.
+      //In result we get a lot of empty space between products and footer (when we choose a category with less results)
+      echo<<<FOOTER
+      <footer id="main-footer">
+      <div id="footer-info">
+        <ul><h4>Informacje</h4>
+          <li>O nas</li>
+        </ul>
+        <ul><h4>Kontakt</h4>
+          <li>000-000-000</li>
+          <li>example@example.com</li>
+          <li>ul. Przykładowa 1, 00-000 Przykład</li>
+        </ul>
+      </div>
+      <div id="copyright"><p>Copyright &copy; YerbaShop 2020</p></div>
+      </footer>
+      FOOTER;
+
       //save product in session variable
-      echo "</form>";
       if(isset($_POST['product'])){
         $product = $_POST['product'];
         if(!isset($_SESSION['product'][$product])) $_SESSION['product'][$product] = 1;
@@ -138,7 +162,11 @@
       }
 
       $conn->close();
+
+      //end of page-wrapper
+      echo '</div>';
   ?>
+
 
 </body>
 </html>
